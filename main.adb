@@ -1,6 +1,6 @@
-with Text_Io;
+with Msort;
 
 procedure Main is
 begin
-  Text_Io.Put_Line("Hello, world!");
+  Msort.Print;
 end Main;
