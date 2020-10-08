@@ -1,9 +1,6 @@
-with Text_Io;
-
 package body Msort is
-
-  procedure Print is
+  procedure Sort(A : in out Arr) is
   begin
-    Text_Io.Put_Line("Hello, world!");
+    A := A;
   end;
 end Msort;

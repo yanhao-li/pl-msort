@@ -1,3 +1,6 @@
 package Msort is
-  procedure Print;
+  LENGTH : constant := 5; 
+  type Int is range -300..300;
+  type Arr is array (1..LENGTH) of Int;
+  procedure Sort(A : in out Arr);
 end Msort;
