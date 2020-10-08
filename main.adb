@@ -1,14 +1,41 @@
 with Msort;
 with Text_Io;
+with Ada.Integer_Text_IO;
 
 procedure Main is
-  A : Msort.Arr := (2, 3, 5, 7, 11);
+  A : Msort.Arr;
   Count : Integer := 0;
+
+  task Reader is
+    entry Read;
+  end Reader;
+  task Sum is
+    entry Start;
+  end Sum;
   task Printer is
     entry Print;
   end Printer;
 
-  task Sum;
+
+  task body Reader is
+  X : Integer;
+  begin
+    accept Read do
+      for I in 1..Msort.LENGTH loop
+        Ada.Integer_Text_IO.Get(X);
+        A(I) := Msort.Int(X);
+      end loop;
+    end Read;
+  end Reader;
+
+  task body Sum is
+  begin
+    accept Start do
+      for Ele of A loop
+        Count := Count + Integer(Ele);
+      end loop;
+    end Start;
+  end Sum;
 
   task body Printer is
   begin
@@ -23,15 +50,10 @@ procedure Main is
       Text_Io.Put_Line("Sum:" & Integer'Image(Count)); 
     end Print;
   end Printer;
-
-  task body Sum is
-  begin
-    for Ele of A loop
-      Count := Count + Integer(Ele);
-    end loop;
-  end Sum;
   
 begin
+  Reader.Read;
+  Sum.Start;
   Msort.Sort(A);
   Printer.Print;
 end Main;
