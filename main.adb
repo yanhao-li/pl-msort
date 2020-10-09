@@ -53,7 +53,7 @@ procedure Main is
   
 begin
   Reader.Read;
-  Sum.Start;
   Msort.Sort(A);
+  Sum.Start;
   Printer.Print;
 end Main;
